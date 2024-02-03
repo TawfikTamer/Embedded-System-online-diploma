@@ -1,5 +1,5 @@
 /*
- * EX3_Add_Two_Integers.c
+ * EX4_Multiply_Two_Floating_numbers.c
  *
  *  Created on: ٠٣‏/٠٢‏/٢٠٢٤
  *      Author: TAWFIK

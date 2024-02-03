@@ -1,5 +1,5 @@
 /*
- * EX3_Add_Two_Integers.c
+ * EX7_Swap_Two_Numbers_Without_Temp.c
  *
  *  Created on: ٠٣‏/٠٢‏/٢٠٢٤
  *      Author: TAWFIK

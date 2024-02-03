@@ -1,5 +1,5 @@
 /*
- * EX3_Add_Two_Integers.c
+ * EX6_Swap_Two_Numbers.c
  *
  *  Created on: ٠٣‏/٠٢‏/٢٠٢٤
  *      Author: TAWFIK
