@@ -9,6 +9,6 @@
 
 int main()
 {
-	printf("C Programming");
+	printf("C Programing");
 	return 0;
 }
