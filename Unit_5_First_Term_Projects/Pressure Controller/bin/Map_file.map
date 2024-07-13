@@ -1,0 +1,207 @@
+
+Allocating common symbols
+Common symbol       size              file
+
+ptrMain             0x4               mainSYS.o
+flag                0x4               Alram.o
+ptrAlarm            0x4               Alram.o
+ptrPS               0x4               PressureSensor.o
+
+Memory Configuration
+
+Name             Origin             Length             Attributes
+flash            0x08000000         0x00020000         xr
+SRAM             0x20000000         0x00005000         xrw
+*default*        0x00000000         0xffffffff
+
+Linker script and memory map
+
+
+.text           0x08000000      0x354
+ *(.vectors*)
+ .vectors       0x08000000       0x1c startup.o
+                0x08000000                vectors
+ *(.text*)
+ .text          0x0800001c       0x54 Alram.o
+                0x0800001c                Aint
+                0x08000038                LedState
+ .text          0x08000070       0x48 app.o
+                0x08000070                main
+ .text          0x080000b8      0x10c GPIO.o
+                0x080000b8                Delay
+                0x080000dc                getPressureVal
+                0x080000f4                Set_Alarm_actuator
+                0x08000144                GPIO_INITIALIZATION
+ .text          0x080001c4       0x58 mainSYS.o
+                0x080001c4                HighPressureDetection
+                0x080001ec                AlarmFlag
+ .text          0x0800021c       0x7c PressureSensor.o
+                0x0800021c                PSinit
+                0x08000238                PSwaiting
+                0x08000258                PSreading
+                0x08000280                PSValue
+ .text          0x08000298       0xbc startup.o
+                0x08000298                NMI_Handler
+                0x08000298                H_Fault_Handler
+                0x08000298                Default_Hundler
+                0x08000298                MM_Fault_Handler
+                0x08000298                Bus_Fault
+                0x08000298                Usage_Fault_Handler
+                0x080002a4                Reset_Hundler
+ *(.rodata)
+                0x08000354                _E_TEXT = .
+
+.glue_7         0x08000354        0x0
+ .glue_7        0x00000000        0x0 linker stubs
+
+.glue_7t        0x08000354        0x0
+ .glue_7t       0x00000000        0x0 linker stubs
+
+.vfp11_veneer   0x08000354        0x0
+ .vfp11_veneer  0x00000000        0x0 linker stubs
+
+.v4_bx          0x08000354        0x0
+ .v4_bx         0x00000000        0x0 linker stubs
+
+.iplt           0x08000354        0x0
+ .iplt          0x00000000        0x0 Alram.o
+
+.rel.dyn        0x08000354        0x0
+ .rel.iplt      0x00000000        0x0 Alram.o
+
+.data           0x20000000        0x4 load address 0x08000354
+                0x20000000                _S_DATA = .
+ *(.data)
+ .data          0x20000000        0x0 Alram.o
+ .data          0x20000000        0x0 app.o
+ .data          0x20000000        0x0 GPIO.o
+ .data          0x20000000        0x4 mainSYS.o
+                0x20000000                Threshold
+ .data          0x20000004        0x0 PressureSensor.o
+ .data          0x20000004        0x0 startup.o
+                0x20000004                . = ALIGN (0x4)
+                0x20000004                _E_DATA = .
+
+.igot.plt       0x20000004        0x0 load address 0x08000358
+ .igot.plt      0x00000000        0x0 Alram.o
+
+.bss            0x20000004       0x18 load address 0x08000358
+                0x20000004                _S_BSS = .
+ *(.bss)
+ .bss           0x20000004        0x0 Alram.o
+ .bss           0x20000004        0x0 app.o
+ .bss           0x20000004        0x0 GPIO.o
+ .bss           0x20000004        0x4 mainSYS.o
+                0x20000004                PValue
+ .bss           0x20000008        0x4 PressureSensor.o
+                0x20000008                PressureValue
+ .bss           0x2000000c        0x0 startup.o
+                0x2000000c                _E_BSS = .
+                0x2000000c                . = ALIGN (0x4)
+                0x2000100c                _STACK_TOP = (. + 0x1000)
+ COMMON         0x2000000c        0x8 Alram.o
+                0x2000000c                flag
+                0x20000010                ptrAlarm
+ COMMON         0x20000014        0x4 mainSYS.o
+                0x20000014                ptrMain
+ COMMON         0x20000018        0x4 PressureSensor.o
+                0x20000018                ptrPS
+LOAD Alram.o
+LOAD app.o
+LOAD GPIO.o
+LOAD mainSYS.o
+LOAD PressureSensor.o
+LOAD startup.o
+OUTPUT(Pressure_Detector_Project.elf elf32-littlearm)
+
+.debug_info     0x00000000      0x5c1
+ .debug_info    0x00000000       0xd5 Alram.o
+ .debug_info    0x000000d5       0xc7 app.o
+ .debug_info    0x0000019c      0x103 GPIO.o
+ .debug_info    0x0000029f       0x9e mainSYS.o
+ .debug_info    0x0000033d      0x103 PressureSensor.o
+ .debug_info    0x00000440      0x181 startup.o
+
+.debug_abbrev   0x00000000      0x34a
+ .debug_abbrev  0x00000000       0x7c Alram.o
+ .debug_abbrev  0x0000007c       0x68 app.o
+ .debug_abbrev  0x000000e4       0x9d GPIO.o
+ .debug_abbrev  0x00000181       0x73 mainSYS.o
+ .debug_abbrev  0x000001f4       0x94 PressureSensor.o
+ .debug_abbrev  0x00000288       0xc2 startup.o
+
+.debug_loc      0x00000000      0x2b8
+ .debug_loc     0x00000000       0x58 Alram.o
+ .debug_loc     0x00000058       0x2c app.o
+ .debug_loc     0x00000084       0xc8 GPIO.o
+ .debug_loc     0x0000014c       0x58 mainSYS.o
+ .debug_loc     0x000001a4       0xb0 PressureSensor.o
+ .debug_loc     0x00000254       0x64 startup.o
+
+.debug_aranges  0x00000000       0xc0
+ .debug_aranges
+                0x00000000       0x20 Alram.o
+ .debug_aranges
+                0x00000020       0x20 app.o
+ .debug_aranges
+                0x00000040       0x20 GPIO.o
+ .debug_aranges
+                0x00000060       0x20 mainSYS.o
+ .debug_aranges
+                0x00000080       0x20 PressureSensor.o
+ .debug_aranges
+                0x000000a0       0x20 startup.o
+
+.debug_line     0x00000000      0x25b
+ .debug_line    0x00000000       0x3e Alram.o
+ .debug_line    0x0000003e       0x79 app.o
+ .debug_line    0x000000b7       0x99 GPIO.o
+ .debug_line    0x00000150       0x41 mainSYS.o
+ .debug_line    0x00000191       0x4d PressureSensor.o
+ .debug_line    0x000001de       0x7d startup.o
+
+.debug_str      0x00000000      0x235
+ .debug_str     0x00000000       0xb1 Alram.o
+                                 0xea (size before relaxing)
+ .debug_str     0x000000b1       0x19 app.o
+                                 0xe8 (size before relaxing)
+ .debug_str     0x000000ca       0x53 GPIO.o
+                                0x119 (size before relaxing)
+ .debug_str     0x0000011d       0x3b mainSYS.o
+                                 0x77 (size before relaxing)
+ .debug_str     0x00000158       0x42 PressureSensor.o
+                                0x10e (size before relaxing)
+ .debug_str     0x0000019a       0x9b startup.o
+                                0x145 (size before relaxing)
+
+.comment        0x00000000       0x11
+ .comment       0x00000000       0x11 Alram.o
+                                 0x12 (size before relaxing)
+ .comment       0x00000000       0x12 app.o
+ .comment       0x00000000       0x12 GPIO.o
+ .comment       0x00000000       0x12 mainSYS.o
+ .comment       0x00000000       0x12 PressureSensor.o
+ .comment       0x00000000       0x12 startup.o
+
+.ARM.attributes
+                0x00000000       0x33
+ .ARM.attributes
+                0x00000000       0x33 Alram.o
+ .ARM.attributes
+                0x00000033       0x33 app.o
+ .ARM.attributes
+                0x00000066       0x33 GPIO.o
+ .ARM.attributes
+                0x00000099       0x33 mainSYS.o
+ .ARM.attributes
+                0x000000cc       0x33 PressureSensor.o
+ .ARM.attributes
+                0x000000ff       0x33 startup.o
+
+.debug_frame    0x00000000      0x1f0
+ .debug_frame   0x00000000       0x44 Alram.o
+ .debug_frame   0x00000044       0x2c app.o
+ .debug_frame   0x00000070       0x78 GPIO.o
+ .debug_frame   0x000000e8       0x44 mainSYS.o
+ .debug_frame   0x0000012c       0x78 PressureSensor.o
+ .debug_frame   0x000001a4       0x4c startup.o
