@@ -7,7 +7,7 @@
 - [Unit 2: C Programming](https://github.com/TawfikTamer/Embedded-System-online-diploma/tree/main/Unit_2_C_Programming) ![image](https://progress-bar.dev/100/)
 - [Unit 3: Embedded C](https://github.com/TawfikTamer/Embedded-System-online-diploma/tree/main/Unit_3_Embedded_C) ![image](https://progress-bar.dev/100/)
 - [Unit 4: System Architect](https://github.com/TawfikTamer/Embedded-System-online-diploma/tree/main/Unit_4_System_Architect) ![image](https://progress-bar.dev/100/)
-- Unit 5: First Term Projects ![image](https://progress-bar.dev/0/)
+- [Unit 5: First Term Projects](https://github.com/TawfikTamer/Embedded-System-online-diploma/tree/main/Unit_5_First_Term_Projects) ![image](https://progress-bar.dev/50/)
 
 #
 ## My Progress page: [Click Here](https://www.learn-in-depth-store.com/certificate/tamertawfik665%40gmail.com) 
