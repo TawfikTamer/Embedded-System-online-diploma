@@ -12,7 +12,7 @@
 #include "std_types.h"
 #include "common_macros.h"
 
-#include "DIO.h"
+#include "GPIO.h"
 
 #include "CLCD.h"
 #include "CLCD_config.h"
@@ -20,27 +20,6 @@
 
 /***************************************************************************************/
 
-/*
-
-###########  8 Bits Mode
- -----------                   ----------
- | ATmega32  |                 |   LCD    |
- |           |                 |          |
- |        PA7|---------------->|D7        |
- |        PA6|---------------->|D6        |
- |        PA5|---------------->|D5        |
- |        PA4|---------------->|D4        |
- |        PA3|---------------->|D3        |
- |        PA2|---------------->|D2        |
- |        PA1|---------------->|D1        |
- |        PA0|---------------->|D0        |
- |           |                 |          |
- |        PC2|---------------->|E         |
- |        PC1|---------------->|RW        |
- |        PC0|---------------->|RS        |
- -----------                   ----------
- */
-/***************************************************************************************/
 
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -61,10 +40,10 @@ void CLCD_Init        ( void ){
 	_delay_ms(50);
 
 	// All Pins as OutPut pins
-	DIO_SetPortDirection ( CLCD_DATA_PORT    , DIO_PORT_OUTPUT           );
-	DIO_SetPinDirection  ( CLCD_CONTROL_PORT , CLCD_RS , DIO_PIN_OUTPUT  );
-	DIO_SetPinDirection  ( CLCD_CONTROL_PORT , CLCD_RW , DIO_PIN_OUTPUT  );
-	DIO_SetPinDirection  ( CLCD_CONTROL_PORT , CLCD_EN , DIO_PIN_OUTPUT  );
+	GPIO_SetPortDirection ( CLCD_DATA_PORT    , GPIO_PORT_OUTPUT           );
+	GPIO_SetPinDirection  ( CLCD_CONTROL_PORT , CLCD_RS , GPIO_PIN_OUTPUT  );
+	GPIO_SetPinDirection  ( CLCD_CONTROL_PORT , CLCD_RW , GPIO_PIN_OUTPUT  );
+	GPIO_SetPinDirection  ( CLCD_CONTROL_PORT , CLCD_EN , GPIO_PIN_OUTPUT  );
 
 	/* Return cursor to the first position on the first line  */
 	CLCD_SendCommand(lcd_Home);
@@ -93,13 +72,13 @@ void CLCD_Init        ( void ){
 
 	// 1- must wait more than 30 ms before any action (VDD rises to 4.5 v)
 	_delay_ms(50);
-	DIO_SetPinDirection      (CLCD_DATA_PORT,DIO_PIN4,DIO_PIN_OUTPUT);
-	DIO_SetPinDirection      (CLCD_DATA_PORT,DIO_PIN5,DIO_PIN_OUTPUT);
-	DIO_SetPinDirection      (CLCD_DATA_PORT,DIO_PIN6,DIO_PIN_OUTPUT);
-	DIO_SetPinDirection      (CLCD_DATA_PORT,DIO_PIN7,DIO_PIN_OUTPUT);
-	DIO_SetPinDirection  ( CLCD_CONTROL_PORT , CLCD_RS , DIO_PIN_OUTPUT  );
-	DIO_SetPinDirection  ( CLCD_CONTROL_PORT , CLCD_RW , DIO_PIN_OUTPUT  );
-	DIO_SetPinDirection  ( CLCD_CONTROL_PORT , CLCD_EN , DIO_PIN_OUTPUT  );
+	GPIO_SetPinDirection      (CLCD_DATA_PORT,GPIO_PIN4,GPIO_PIN_OUTPUT);
+	GPIO_SetPinDirection      (CLCD_DATA_PORT,GPIO_PIN5,GPIO_PIN_OUTPUT);
+	GPIO_SetPinDirection      (CLCD_DATA_PORT,GPIO_PIN6,GPIO_PIN_OUTPUT);
+	GPIO_SetPinDirection      (CLCD_DATA_PORT,GPIO_PIN7,GPIO_PIN_OUTPUT);
+	GPIO_SetPinDirection  ( CLCD_CONTROL_PORT , CLCD_RS , GPIO_PIN_OUTPUT  );
+	GPIO_SetPinDirection  ( CLCD_CONTROL_PORT , CLCD_RW , GPIO_PIN_OUTPUT  );
+	GPIO_SetPinDirection  ( CLCD_CONTROL_PORT , CLCD_EN , GPIO_PIN_OUTPUT  );
 
 
 
@@ -142,19 +121,19 @@ void CLCD_SendData    ( u8 Copy_u8Data ){
 	//<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<      8 Bits Mode       >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 	#if   CLCD_MODE == 8
 
-	DIO_SetPortValue ( CLCD_DATA_PORT    , Copy_u8Data        );
-	DIO_SetPinValue  ( CLCD_CONTROL_PORT , CLCD_RS , DIO_PIN_HIGH );
-	DIO_SetPinValue  ( CLCD_CONTROL_PORT , CLCD_RW , DIO_PIN_LOW  );
+	GPIO_SetPortValue ( CLCD_DATA_PORT    , Copy_u8Data        );
+	GPIO_SetPinValue  ( CLCD_CONTROL_PORT , CLCD_RS , GPIO_PIN_HIGH );
+	GPIO_SetPinValue  ( CLCD_CONTROL_PORT , CLCD_RW , GPIO_PIN_LOW  );
 	CLCD_SendFallingEdge();
 
 	//<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<      4 Bits Mode       >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 	#elif   CLCD_MODE == 4
 
-	DIO_SetPinValue  ( CLCD_CONTROL_PORT , CLCD_RS , DIO_PIN_HIGH );
-	DIO_SetPinValue  ( CLCD_CONTROL_PORT , CLCD_RW , DIO_PIN_LOW  );
-	DIO_WriteHighNibbles (CLCD_DATA_PORT ,(Copy_u8Data>>4));            // send the most 4 bits of data to high nibbles
+	GPIO_SetPinValue  ( CLCD_CONTROL_PORT , CLCD_RS , GPIO_PIN_HIGH );
+	GPIO_SetPinValue  ( CLCD_CONTROL_PORT , CLCD_RW , GPIO_PIN_LOW  );
+	GPIO_WriteHighNibbles (CLCD_DATA_PORT ,(Copy_u8Data>>4));            // send the most 4 bits of data to high nibbles
 	CLCD_SendFallingEdge();
-	DIO_WriteHighNibbles (CLCD_DATA_PORT ,Copy_u8Data);               // send the least 4 bits of data to high nibbles
+	GPIO_WriteHighNibbles (CLCD_DATA_PORT ,Copy_u8Data);               // send the least 4 bits of data to high nibbles
 	CLCD_SendFallingEdge();
 
 	#endif
@@ -176,20 +155,20 @@ void CLCD_SendCommand ( u8 Copy_u8Command ){
 	//<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<      8 Bits Mode       >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 	#if   CLCD_MODE == 8
 
-	DIO_SetPortValue ( CLCD_DATA_PORT    , Copy_u8Command     );
-	DIO_SetPinValue  ( CLCD_CONTROL_PORT , CLCD_RS , DIO_PIN_LOW  );
+	GPIO_SetPortValue ( CLCD_DATA_PORT    , Copy_u8Command     );
+	GPIO_SetPinValue  ( CLCD_CONTROL_PORT , CLCD_RS , GPIO_PIN_LOW  );
 	// RW always connect to GND to Write
-	DIO_SetPinValue          (CLCD_CONTROL_PORT,CLCD_RW , DIO_PIN_LOW    );
+	GPIO_SetPinValue          (CLCD_CONTROL_PORT,CLCD_RW , GPIO_PIN_LOW    );
 	CLCD_SendFallingEdge();
 
 	//<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<      4 Bits Mode       >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 	#elif   CLCD_MODE == 4
 
-	DIO_SetPinValue  ( CLCD_CONTROL_PORT , CLCD_RS , DIO_PIN_LOW  );
-	DIO_SetPinValue  ( CLCD_CONTROL_PORT , CLCD_RW , DIO_PIN_LOW  );
-	DIO_WriteHighNibbles (CLCD_DATA_PORT ,Copy_u8Command>>4);             // send the most 4 bits of data to high nibbles
+	GPIO_SetPinValue  ( CLCD_CONTROL_PORT , CLCD_RS , GPIO_PIN_LOW  );
+	GPIO_SetPinValue  ( CLCD_CONTROL_PORT , CLCD_RW , GPIO_PIN_LOW  );
+	GPIO_WriteHighNibbles (CLCD_DATA_PORT ,Copy_u8Command>>4);             // send the most 4 bits of data to high nibbles
 	CLCD_SendFallingEdge();
-	DIO_WriteHighNibbles (CLCD_DATA_PORT ,Copy_u8Command);                // send the least 4 bits of data to high nibbles
+	GPIO_WriteHighNibbles (CLCD_DATA_PORT ,Copy_u8Command);                // send the least 4 bits of data to high nibbles
 	CLCD_SendFallingEdge();
 
 	#endif
@@ -351,9 +330,9 @@ void CLCD_ClearScreen(void)
 */
 static void CLCD_SendFallingEdge(void)
 {
-	DIO_SetPinValue  ( CLCD_CONTROL_PORT , CLCD_EN , DIO_PIN_HIGH );
+	GPIO_SetPinValue  ( CLCD_CONTROL_PORT , CLCD_EN , GPIO_PIN_HIGH );
 	_delay_ms(1);
-	DIO_SetPinValue  ( CLCD_CONTROL_PORT , CLCD_EN , DIO_PIN_LOW  );
+	GPIO_SetPinValue  ( CLCD_CONTROL_PORT , CLCD_EN , GPIO_PIN_LOW  );
 	_delay_ms(1);
 }
 

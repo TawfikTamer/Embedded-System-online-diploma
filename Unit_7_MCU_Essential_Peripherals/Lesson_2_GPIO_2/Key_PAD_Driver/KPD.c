@@ -12,7 +12,7 @@
 #include "std_types.h"
 #include "common_macros.h"
 
-#include "DIO.h"
+#include "GPIO.h"
 
 #include "KPD.h"
 #include "KPD_config.h"
@@ -27,37 +27,37 @@ void KPD_Init(void){
 
 	/*                    connect pull up for the pins of the rows                             */
 
-	DIO_ConnectPullup        ( KPD_PORT , KPD_R0 , DIO_PIN_HIGH );
-	DIO_ConnectPullup        ( KPD_PORT , KPD_R1 , DIO_PIN_HIGH );
-	DIO_ConnectPullup        ( KPD_PORT , KPD_R2 , DIO_PIN_HIGH );
-	DIO_ConnectPullup        ( KPD_PORT , KPD_R3 , DIO_PIN_HIGH );
+	GPIO_ConnectPullup        ( KPD_PORT , KPD_R0 , GPIO_PIN_HIGH );
+	GPIO_ConnectPullup        ( KPD_PORT , KPD_R1 , GPIO_PIN_HIGH );
+	GPIO_ConnectPullup        ( KPD_PORT , KPD_R2 , GPIO_PIN_HIGH );
+	GPIO_ConnectPullup        ( KPD_PORT , KPD_R3 , GPIO_PIN_HIGH );
 
 
 	/*        This code equivalent to connect pull up for the pins of the rows                  */
 
-	/*DIO_enumSetPinDirection( KPD_PORT , KPD_R0 , DIO_INPUT );
-	DIO_SetPinDirection( KPD_PORT , KPD_R1 , DIO_INPUT );
-	DIO_SetPinDirection( KPD_PORT , KPD_R2 , DIO_INPUT );
-	DIO_SetPinDirection( KPD_PORT , KPD_R3 , DIO_INPUT );
+	/*GPIO_enumSetPinDirection( KPD_PORT , KPD_R0 , GPIO_INPUT );
+	GPIO_SetPinDirection( KPD_PORT , KPD_R1 , GPIO_INPUT );
+	GPIO_SetPinDirection( KPD_PORT , KPD_R2 , GPIO_INPUT );
+	GPIO_SetPinDirection( KPD_PORT , KPD_R3 , GPIO_INPUT );
 
-	DIO_SetPinValue    ( KPD_PORT , KPD_R0 , DIO_HIGH );
-	DIO_SetPinValue    ( KPD_PORT , KPD_R1 , DIO_HIGH );
-	DIO_SetPinValue    ( KPD_PORT , KPD_R2 , DIO_HIGH );
-	DIO_SetPinValue    ( KPD_PORT , KPD_R3 , DIO_HIGH );*/
+	GPIO_SetPinValue    ( KPD_PORT , KPD_R0 , GPIO_HIGH );
+	GPIO_SetPinValue    ( KPD_PORT , KPD_R1 , GPIO_HIGH );
+	GPIO_SetPinValue    ( KPD_PORT , KPD_R2 , GPIO_HIGH );
+	GPIO_SetPinValue    ( KPD_PORT , KPD_R3 , GPIO_HIGH );*/
 
 
 	/*                 connect the pins of the columns as output pins (HIGH)                    */
 
 
-	DIO_SetPinDirection     ( KPD_PORT , KPD_C0 , DIO_PIN_OUTPUT );
-	DIO_SetPinDirection     ( KPD_PORT , KPD_C1 , DIO_PIN_OUTPUT );
-	DIO_SetPinDirection     ( KPD_PORT , KPD_C2 , DIO_PIN_OUTPUT );
-	DIO_SetPinDirection     ( KPD_PORT , KPD_C3 , DIO_PIN_OUTPUT );
+	GPIO_SetPinDirection     ( KPD_PORT , KPD_C0 , GPIO_PIN_OUTPUT );
+	GPIO_SetPinDirection     ( KPD_PORT , KPD_C1 , GPIO_PIN_OUTPUT );
+	GPIO_SetPinDirection     ( KPD_PORT , KPD_C2 , GPIO_PIN_OUTPUT );
+	GPIO_SetPinDirection     ( KPD_PORT , KPD_C3 , GPIO_PIN_OUTPUT );
 					     
-	DIO_SetPinValue         ( KPD_PORT , KPD_C0 , DIO_PIN_HIGH );
-	DIO_SetPinValue         ( KPD_PORT , KPD_C1 , DIO_PIN_HIGH );
-	DIO_SetPinValue         ( KPD_PORT , KPD_C2 , DIO_PIN_HIGH );
-	DIO_SetPinValue         ( KPD_PORT , KPD_C3 , DIO_PIN_HIGH );
+	GPIO_SetPinValue         ( KPD_PORT , KPD_C0 , GPIO_PIN_HIGH );
+	GPIO_SetPinValue         ( KPD_PORT , KPD_C1 , GPIO_PIN_HIGH );
+	GPIO_SetPinValue         ( KPD_PORT , KPD_C2 , GPIO_PIN_HIGH );
+	GPIO_SetPinValue         ( KPD_PORT , KPD_C3 , GPIO_PIN_HIGH );
 
 }
 
@@ -77,11 +77,11 @@ u8   KPD_u8GetPressed( void ){
 
 	for( LOC_u8Col = 0 + KPD_COL_INIT ; LOC_u8Col < KPD_COL_END + 1 ; LOC_u8Col++ ){
 
-		DIO_SetPinValue    ( KPD_PORT , LOC_u8Col , DIO_PIN_LOW );   // Low on the columns
+		GPIO_SetPinValue    ( KPD_PORT , LOC_u8Col , GPIO_PIN_LOW );   // Low on the columns
 
 		for( LOC_u8Row = 0 +KPD_ROW_INIT ; LOC_u8Row < KPD_ROW_END + 1 ; LOC_u8Row++ ){
 
-			DIO_GetPinValue( KPD_PORT , LOC_u8Row , &LOC_u8GetPressed ); // retun the row value
+			GPIO_GetPinValue( KPD_PORT , LOC_u8Row , &LOC_u8GetPressed ); // retun the row value
 			/* 
 			if the row is high ....there is no pressed buttons
 			if the row is low ....there is pressed button ===>> I will check on this
@@ -91,7 +91,7 @@ u8   KPD_u8GetPressed( void ){
 
 				_delay_ms(50);   // delay for bouncing
 
-				DIO_GetPinValue( KPD_PORT , LOC_u8Row , &LOC_u8GetPressed );   // to make sure that the button is pressed & check again
+				GPIO_GetPinValue( KPD_PORT , LOC_u8Row , &LOC_u8GetPressed );   // to make sure that the button is pressed & check again
 
 				if( LOC_u8GetPressed == 0 )
 
@@ -108,11 +108,11 @@ u8   KPD_u8GetPressed( void ){
 				}
 
 				// stay here if the button is pressed   # we could put delay 200 ms instead of that
-				DIO_GetPinValue( KPD_PORT , LOC_u8Row , &LOC_u8GetPressed );
-				while( DIO_PIN_LOW == LOC_u8GetPressed ) /*  This cond for safty instead of (LOC_u8GetPressed == DIO_PIN_LOW) if i foget = */
+				GPIO_GetPinValue( KPD_PORT , LOC_u8Row , &LOC_u8GetPressed );
+				while( GPIO_PIN_LOW == LOC_u8GetPressed ) /*  This cond for safty instead of (LOC_u8GetPressed == GPIO_PIN_LOW) if i foget = */
 				{
 
-					DIO_GetPinValue( KPD_PORT , LOC_u8Row , &LOC_u8GetPressed );
+					GPIO_GetPinValue( KPD_PORT , LOC_u8Row , &LOC_u8GetPressed );
 
 				}
 
@@ -123,7 +123,7 @@ u8   KPD_u8GetPressed( void ){
 		}
 
 		// return this column’s pin to high
-		DIO_SetPinValue    ( KPD_PORT , LOC_u8Col , DIO_PIN_HIGH );
+		GPIO_SetPinValue    ( KPD_PORT , LOC_u8Col , GPIO_PIN_HIGH );
 
 	}
 

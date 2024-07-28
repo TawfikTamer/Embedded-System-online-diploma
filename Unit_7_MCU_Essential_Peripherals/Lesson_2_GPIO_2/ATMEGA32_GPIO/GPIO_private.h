@@ -1,14 +1,14 @@
 /*
- *<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<    DIO_private.h    >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+ *<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<    GPIO_private.h    >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
  *
  *  Author : tawfik tamer ibrahim
  *  Layer  : MCAL
- *  SWC    : DIO/GPIO
+ *  SWC    : GPIO
  *
  */ 
  
- #ifndef DIO_PRIVATE_H_
- #define DIO_PRIVATE_H_
+ #ifndef GPIO_PRIVATE_H_
+ #define GPIO_PRIVATE_H_
  
  /* group A registers */
  #define DDRA *((volatile u8*)0x3A)
