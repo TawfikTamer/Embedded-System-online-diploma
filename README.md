@@ -13,7 +13,7 @@
 ### Second Term ![image](https://progress-bar.dev/20/?title=Progress)
 
 - [Unit 6: MicroController Arch](https://github.com/TawfikTamer/Embedded-System-online-diploma/tree/main/Unit_6_MicroController_Arch) ![image](https://progress-bar.dev/100/)
-- [Unit 7: MCU Essential Peripherals](https://github.com/TawfikTamer/Embedded-System-online-diploma/tree/main/Unit_7_MCU_Essential_Peripherals) ![image](https://progress-bar.dev/50/)
+- [Unit 7: MCU Essential Peripherals](https://github.com/TawfikTamer/Embedded-System-online-diploma/tree/main/Unit_7_MCU_Essential_Peripherals) ![image](https://progress-bar.dev/75/)
 - Unit 8: MCU Interfacing ![image](https://progress-bar.dev/0/)
 - Unit 9: MCU Timers/ADC ![image](https://progress-bar.dev/0/)
 - Unit 10: Testing & Validation ![image](https://progress-bar.dev/0/)
