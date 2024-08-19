@@ -14,7 +14,7 @@
 
 - [Unit 6: MicroController Arch](https://github.com/TawfikTamer/Embedded-System-online-diploma/tree/main/Unit_6_MicroController_Arch) ![image](https://us-central1-progress-markdown.cloudfunctions.net/progress/100)
 - [Unit 7: MCU Essential Peripherals](https://github.com/TawfikTamer/Embedded-System-online-diploma/tree/main/Unit_7_MCU_Essential_Peripherals) ![image](https://us-central1-progress-markdown.cloudfunctions.net/progress/100)
-- Unit 8: MCU Interfacing ![image](https://us-central1-progress-markdown.cloudfunctions.net/progress/0)
+- [Unit 8: MCU Interfacing](https://github.com/TawfikTamer/Embedded-System-online-diploma/tree/main/Unit_8_MCU_Interfacing) ![image](https://us-central1-progress-markdown.cloudfunctions.net/progress/15)
 - Unit 9: MCU Timers/ADC ![image](https://us-central1-progress-markdown.cloudfunctions.net/progress/0)
 - Unit 10: Testing & Validation ![image](https://us-central1-progress-markdown.cloudfunctions.net/progress/0)
 
