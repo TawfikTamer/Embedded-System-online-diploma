@@ -1,0 +1,11 @@
+GPIO.c:10:11:Get_CRLH_Position	16	static
+GPIO.c:94:18:GPIO_SetPinDirection	32	static
+GPIO.c:267:18:GPIO_SetPinValue	24	static
+GPIO.c:309:18:GPIO_GetPinValue	24	static
+GPIO.c:339:18:GPIO_TogglePinValue	24	static
+GPIO.c:370:18:GPIO_SetPortDirection	24	static
+GPIO.c:494:18:GPIO_SetPortValue	24	static
+GPIO.c:538:18:GPIO_GetPortValue	24	static
+GPIO.c:568:18:GPIO_TogglePortValue	24	static
+GPIO.c:605:18:GPIO_WriteHighNibbles	24	static
+GPIO.c:641:18:GPIO_WriteLowNibbles	24	static
