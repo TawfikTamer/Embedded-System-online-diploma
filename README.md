@@ -22,4 +22,5 @@
 ## Google Drive: [Click Here](https://drive.google.com/drive/u/0/folders/1y91bvj3ziwIceGrSEUH6SIjdSMHTLDch) 
 
 ## My Progress page: [Click Here](https://www.learn-in-depth-store.com/certificate/tamertawfik665%40gmail.com) 
-![image](https://github.com/TawfikTamer/Embedded-System-online-diploma/assets/142694793/bdf34a61-505d-4090-989e-ba0cf46f978f)
+![FIRST TERM](https://github.com/user-attachments/assets/118ebb58-03c2-46b3-86d5-99bb559f1774)
+
